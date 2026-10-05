@@ -1,0 +1,122 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-primary: #555b00;
+  --color-secondary: #be7f00;
+  --color-canvas: #f6efe5;
+  --color-darkbase: #282828;
+  --color-surface: #1e1e1e;
+  --color-muted: #ada89a;
+  --font-serif: "Playfair Display", Georgia, serif;
+  --font-sans: "Public Sans", Arial, sans-serif;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-float-delayed: float 6s ease-in-out 3s infinite;
+  --animate-slow-zoom: slow-zoom 20s ease-in-out infinite alternate;
+  --animate-drift-x: drift-x 18s ease-in-out infinite;
+  --animate-drift-x-rev: drift-x-rev 22s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+@keyframes slow-zoom {
+  from { transform: scale(1); }
+  to { transform: scale(1.1); }
+}
+
+@keyframes drift-x {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(18px); }
+}
+
+@keyframes drift-x-rev {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(-18px); }
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
+body {
+  background-color: #f6efe5;
+  color: #282828;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: #555b00;
+  color: white;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(40px) scale(0.985);
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.parallax-y {
+  transform: translate3d(0, var(--parallax-y, 0px), 0);
+  will-change: transform;
+}
+
+.micro-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background: rgb(85 91 0 / 18%);
+  filter: blur(0.2px);
+}
+
+input[type="date"],
+input[type="number"],
+input[type="text"] {
+  background-color: transparent;
+  border-bottom: 1px solid #ada89a;
+  border-radius: 0;
+  color: #282828;
+}
+
+input:focus {
+  outline: none;
+  border-bottom-color: #555b00;
+}
+
+.dark-overlay {
+  background-color: rgb(0 0 0 / 36%);
+}
+
+.hide-scrollbar {
+  scrollbar-width: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+
+  .parallax-y {
+    transform: none;
+  }
+}
